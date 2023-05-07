@@ -39,7 +39,7 @@
         <div class="col-md">
             <ul style="list-style:none;">
                 <li class="text-1">
-                    States
+                    <span style="text-decoration:underline;">States:-</span>
                     <ul style="list-style:square;">
                         {% for state in states %}
                         {% if not state.Is_Union_Territory %}
@@ -58,7 +58,7 @@
                     </ul>
                 </li>
                 <li class="text-1">
-                    Union Territories
+                    <span style="text-decoration:underline;">Union Territories:-</span>
                     <ul style="list-style:square;">
                         {% for state in states %}
                         {% if state.Is_Union_Territory %}
