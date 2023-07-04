@@ -3,10 +3,13 @@ from django.http import *
 from django.views.decorators.http import *
 import traceback
 from .models import *
+from django_ratelimit.decorators import ratelimit
+from django.conf import settings
 
 
 # Create your views here.
 @require_safe
+@ratelimit(group='Main', key='ip', rate=settings.DEFAULT_VIEW_RATE_LIMIT, method=ratelimit.ALL, block=True)
 def home(request):
     context = {
         'states': States.objects.all(),
@@ -15,6 +18,7 @@ def home(request):
     return render(request, "index.html", context=context)
 
 @require_safe
+@ratelimit(group='Main', key='ip', rate=settings.DEFAULT_VIEW_RATE_LIMIT, method=ratelimit.ALL, block=True)
 def apiSearch(request):
     try:
         state = request.GET.get("state_name", '')
