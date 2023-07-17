@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="title" content="States and Districts">
+    <meta name="description" content="A list of all indian states and union territories, and their districts.">
+
+    <title>States and Districts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <style>
+        body{
+            padding: 15px;
+            overflow-x: hidden;
+        }
+        .flag-icon{
+            width: 170px !important;
+            height: 120px !important;
+            border: 1px solid gray;
+        }
+        .text-1{
+            margin-top: 10px;
+            font-size: 38px;
+            font-weight: bold;
+        }
+        .text-2{
+            font-size: 35px;
+            font-weight: 600;
+        }
+        .text-3{
+            font-size: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row g-0">
+        <div class="col-md-2"></div>
+        <div class="col-md">
+            <ul style="list-style:none;">
+                <li class="text-1">
+                    <span style="text-decoration:underline;">States:-</span>
+                    <ul style="list-style:square;">
+                        {% for state in states %}
+                        {% if not state.Is_Union_Territory %}
+                        <li class="text-2">
+                            {{state.Name}}
+                            <ul style="list-style:circle;">
+                                {% for district in districts %}
+                                {% if district.state == state %}
+                                <li class="text-3">{{district.Name}}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="text-1">
+                    <span style="text-decoration:underline;">Union Territories:-</span>
+                    <ul style="list-style:square;">
+                        {% for state in states %}
+                        {% if state.Is_Union_Territory %}
+                        <li class="text-2">
+                            {{state.Name}}
+                            <ul style="list-style:circle;">
+                                {% for district in districts %}
+                                {% if district.state == state %}
+                                <li class="text-3">{{district.Name}}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</body>
+
+</html>
